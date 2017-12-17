@@ -20,7 +20,7 @@ public class MyLinkedList<E> {
     }
 
     E deleteTopNode() {
-        Node<E> deletedNode = null;
+        Node<E> deletedNode;
         if (top != null) {
             deletedNode = top;
             Node<E> previous = top.getPrevious();
@@ -29,9 +29,11 @@ public class MyLinkedList<E> {
             }
             top = previous;
             size--;
+            checkAndSetEmpty();
+            return deletedNode.getData();
+        } else {
+            throw new NullPointerException("No data to pop");
         }
-        setEmpty();
-        return deletedNode != null ? deletedNode.getData() : null;
     }
 
     public Node<E> getTop() {
@@ -42,7 +44,7 @@ public class MyLinkedList<E> {
         return size;
     }
 
-    private void setEmpty() {
+    private void checkAndSetEmpty() {
         isEmpty = size == 0;
     }
 

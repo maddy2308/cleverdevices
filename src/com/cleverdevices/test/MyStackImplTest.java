@@ -10,18 +10,19 @@ import static org.junit.Assert.assertTrue;
 public class MyStackImplTest {
 
     // We could create different type of stacks to test.
-    private MyStackImpl<String> myStringStack;
+    private MyStackImpl<String> myStringStack, myEmptyElementStack;
     private final String ONE_ELEMENT = "test";
     private final String SECOND_ELEMENT = "test2";
 
     @Before
     public void runBeforeTestMethod() {
         myStringStack = new MyStackImpl<>();
+        myEmptyElementStack = new MyStackImpl<>();
     }
 
     @Test
     public void testEmptyStringStack() {
-        assertTrue("Check Empty Stack", myStringStack.isEmpty());
+        assertTrue(myEmptyElementStack.isEmpty());
     }
 
     @Test
@@ -61,6 +62,12 @@ public class MyStackImplTest {
         assertEquals(myStringStack.size(), 2);
         myStringStack.pop();
         assertEquals(myStringStack.size(), 1);
+    }
+
+
+    @Test(expected=NullPointerException.class)
+    public void testPopOnEmptyElementStack() {
+        myEmptyElementStack.pop();
     }
 
 }
